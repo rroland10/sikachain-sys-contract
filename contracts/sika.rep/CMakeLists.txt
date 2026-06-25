@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
-project(sika_rep)
-
 add_contract(
    sika.rep sika.rep
    ${CMAKE_CURRENT_SOURCE_DIR}/src/sika.rep.cpp

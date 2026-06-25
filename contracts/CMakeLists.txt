@@ -21,6 +21,15 @@
 # =============================================================================
 
 cmake_minimum_required(VERSION 3.5)
+
+# If CDT_BUILD_PATH was set, use it (for source builds of CDT).
+if(DEFINED ENV{CDT_BUILD_PATH})
+   set(cdt_DIR "$ENV{CDT_BUILD_PATH}/lib/cmake/cdt")
+endif()
+
+# Must run before project() so CDT selects cdt-cpp instead of host c++.
+find_package(cdt REQUIRED)
+
 project(sikachain-contracts VERSION 0.1.0)
 
 # SIKACHAIN=ON: privileged system account is `sika` (Spring -DSIKACHAIN=ON).
@@ -29,14 +38,6 @@ option(SIKACHAIN "Build for SikaChain (SYSTEM account = sika)" OFF)
 if(SIKACHAIN)
    add_definitions(-DSIKACHAIN)
    message(STATUS "SIKACHAIN enabled: SYSTEM account = sika")
-endif()
-
-# Find the CDT package. CDT 4.1.0+ is required.
-find_package(cdt REQUIRED)
-
-# If CDT_BUILD_PATH was set, use it (for source builds of CDT).
-if(DEFINED ENV{CDT_BUILD_PATH})
-   set(cdt_DIR "$ENV{CDT_BUILD_PATH}/lib/cmake/cdt")
 endif()
 
 # Each contract is a self-contained subdirectory with its own CMakeLists.

@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
-project(sika_guard)
-
 add_contract(
    sika.guard sika.guard
    ${CMAKE_CURRENT_SOURCE_DIR}/src/sika.guard.cpp

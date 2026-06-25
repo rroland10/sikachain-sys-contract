@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
-project(sika_system)
-
 # Pull in CDT's contract-building macros
 add_contract(
    sika.system sika.system

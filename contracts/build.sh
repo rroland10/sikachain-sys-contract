@@ -69,6 +69,18 @@ fi
 if [[ -n "${CDT_BUILD_PATH:-}" ]]; then
    CMAKE_ARGS+=( -Dcdt_DIR="$CDT_BUILD_PATH/lib/cmake/cdt" )
 fi
+
+if [[ -z "${CMAKE_TOOLCHAIN_FILE:-}" ]]; then
+   for toolchain in \
+      "${CDT_BUILD_PATH:+$CDT_BUILD_PATH/lib/cmake/cdt/CDTWasmToolchain.cmake}" \
+      /usr/lib/cmake/cdt/CDTWasmToolchain.cmake \
+      /usr/local/lib/cmake/cdt/CDTWasmToolchain.cmake; do
+      if [[ -n "${toolchain}" && -f "${toolchain}" ]]; then
+         CMAKE_ARGS+=( -DCMAKE_TOOLCHAIN_FILE="${toolchain}" )
+         break
+      fi
+   done
+fi
 if [[ "$BUILD_TESTS" == "ON" && -n "${SPRING_BUILD_PATH:-}" ]]; then
    CMAKE_ARGS+=( -Dspring_DIR="$SPRING_BUILD_PATH/lib/cmake/spring" )
 fi

@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
-project(sika_treas)
-
 add_contract(
    sika.treas sika.treas
    ${CMAKE_CURRENT_SOURCE_DIR}/src/sika.treas.cpp

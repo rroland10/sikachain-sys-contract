@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.5)
-project(sika_token)
-
 add_contract(
    sika.token sika.token
    ${CMAKE_CURRENT_SOURCE_DIR}/src/sika.token.cpp

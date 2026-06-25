@@ -8,3 +8,4 @@
 # Build output
 contracts/build/
 contracts/.docker-build-*/
+contracts/tests/build/

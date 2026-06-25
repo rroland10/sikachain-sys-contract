@@ -1,0 +1,10 @@
+.DS_Store
+*.tar.gz
+
+# Legacy root-level copies (canonical sources live under contracts/)
+/*.cpp
+/*.hpp
+
+# Build output
+contracts/build/
+contracts/.docker-build-*/

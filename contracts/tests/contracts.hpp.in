@@ -1,0 +1,30 @@
+#pragma once
+
+#include <fc/io/fstream.hpp>
+#include <string>
+#include <vector>
+
+#define MAKE_READ_WASM_ABI(CN, C)                                                          \
+   static std::vector<uint8_t> CN##_wasm() {                                                \
+      std::string s;                                                                       \
+      fc::read_file_contents(                                                              \
+         "@SIKA_CONTRACTS_BUILD@/contracts/" #C "/" #C ".wasm", s);                          \
+      return std::vector<uint8_t>(s.begin(), s.end());                                     \
+   }                                                                                       \
+   static std::string CN##_abi() {                                                         \
+      std::string s;                                                                       \
+      fc::read_file_contents(                                                              \
+         "@SIKA_CONTRACTS_BUILD@/contracts/" #C "/" #C ".abi", s);                           \
+      return s;                                                                            \
+   }
+
+namespace sikachain::testing {
+   struct contracts {
+      MAKE_READ_WASM_ABI(system, sika.system)
+      MAKE_READ_WASM_ABI(token, sika.token)
+      MAKE_READ_WASM_ABI(rep, sika.rep)
+      MAKE_READ_WASM_ABI(guard, sika.guard)
+      MAKE_READ_WASM_ABI(rules, sika.rules)
+      MAKE_READ_WASM_ABI(issue, sika.issue)
+   };
+} // namespace sikachain::testing
